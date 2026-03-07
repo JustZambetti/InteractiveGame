@@ -5,28 +5,25 @@ import { isEndingEvent } from '../types/story';
 import { useStoryEngine } from '../hooks/useStoryEngine';
 import { useGameStore } from '../store/gameStore';
 import { EventCard } from './EventCard/EventCard';
+import { Carousel } from './Carousel/Carousel';
 
 interface GameScreenProps {
   story: Story;
 }
 
-// Card advance variants: old card exits left, new card enters from right.
 const EASE_IN = 'easeIn' as const;
 const EASE_OUT = 'easeOut' as const;
 
+// Active card: slides in from the right, exits to the left.
 const cardAdvanceVariants = {
   initial: { x: 80, opacity: 0, scale: 0.95 },
   animate: {
-    x: 0,
-    opacity: 1,
-    scale: 1,
+    x: 0, opacity: 1, scale: 1,
     transition: { duration: 0.32, ease: EASE_OUT },
   },
   exit: {
-    x: -80,
-    opacity: 0,
-    scale: 0.9,
-    transition: { duration: 0.24, ease: EASE_IN },
+    x: -60, opacity: 0, scale: 0.9,
+    transition: { duration: 0.22, ease: EASE_IN },
   },
 };
 
@@ -35,8 +32,8 @@ export function GameScreen({ story }: GameScreenProps) {
   const setCardPhase = useGameStore((s) => s.setCardPhase);
   const currentEventId = useGameStore((s) => s.currentEventId);
 
-  // Phase 3: auto-start on slot 1 if no game is active yet.
-  // TitleScreen (Phase 4) will replace this.
+  // Phase 3/4: auto-start on slot 1 if no game is active.
+  // TitleScreen (Phase 5) will replace this.
   useEffect(() => {
     if (!currentEventId) {
       engine.startNewGame(1);
@@ -51,7 +48,7 @@ export function GameScreen({ story }: GameScreenProps) {
     );
   }
 
-  // Ending screen
+  // ── Ending screen ─────────────────────────────────────────────────────────
   if (isEndingEvent(engine.currentEvent)) {
     const ending = engine.currentEvent;
     return (
@@ -59,11 +56,10 @@ export function GameScreen({ story }: GameScreenProps) {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, ease: 'easeOut' }}
+          transition={{ duration: 0.6, ease: EASE_OUT }}
           className="flex flex-col items-center gap-6 text-center"
           style={{ width: '88vw', maxWidth: 420 }}
         >
-          {/* Ending image */}
           <div
             className="w-full overflow-hidden rounded-xl border border-[#5c4a2a]"
             style={{ height: 260 }}
@@ -75,20 +71,16 @@ export function GameScreen({ story }: GameScreenProps) {
             />
           </div>
 
-          {/* Divider */}
           <div className="w-12 h-px bg-[#5c4a2a]" />
 
-          {/* Ending title */}
           <h2 className="text-[#d4b87a] font-serif text-2xl tracking-wide">
             {ending.endingTitle}
           </h2>
 
-          {/* Ending text */}
           <p className="text-[#c8b896] font-serif text-base leading-[1.8] italic">
             {ending.text}
           </p>
 
-          {/* Actions */}
           <div className="flex flex-col gap-3 w-full pt-2">
             <button
               onClick={() => engine.startNewGame(1)}
@@ -107,27 +99,30 @@ export function GameScreen({ story }: GameScreenProps) {
     );
   }
 
+  // ── Game screen with carousel ──────────────────────────────────────────────
   return (
-    <div className="min-h-dvh flex flex-col items-center justify-center">
-      <AnimatePresence mode="wait">
-        <motion.div
-          key={engine.currentEvent.id}
-          variants={cardAdvanceVariants}
-          initial="initial"
-          animate="animate"
-          exit="exit"
-        >
-          <EventCard
-            event={engine.currentEvent}
-            cardPhase={engine.cardPhase}
-            pendingOutcome={engine.pendingOutcome}
-            onSelectChoice={engine.selectChoice}
-            onConfirmConsequence={engine.confirmConsequence}
-            onContinueNarrative={engine.continueNarrative}
-            onSetCardPhase={setCardPhase}
-          />
-        </motion.div>
-      </AnimatePresence>
+    <div className="min-h-dvh flex flex-col justify-center overflow-hidden">
+      <Carousel history={engine.history}>
+        <AnimatePresence mode="wait">
+          <motion.div
+            key={engine.currentEvent.id}
+            variants={cardAdvanceVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+          >
+            <EventCard
+              event={engine.currentEvent}
+              cardPhase={engine.cardPhase}
+              pendingOutcome={engine.pendingOutcome}
+              onSelectChoice={engine.selectChoice}
+              onConfirmConsequence={engine.confirmConsequence}
+              onContinueNarrative={engine.continueNarrative}
+              onSetCardPhase={setCardPhase}
+            />
+          </motion.div>
+        </AnimatePresence>
+      </Carousel>
     </div>
   );
 }

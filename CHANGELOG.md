@@ -30,6 +30,30 @@ Entries are organized by development phase, then by commit.
 
 ---
 
+## Phase 4 — Carousel
+**Goal:** Horizontal scrollable carousel showing past event cards alongside the active card.
+
+### Commit: `(pending)` — Phase 4: carousel with past cards and auto-scroll
+
+**`src/components/Carousel/PastCard.tsx`**
+- Read-only card showing a past event: event image (top 45%), truncated story text (4-line clamp), and the choice label the player made (↳ label, italic, truncated).
+- Sized at ~58% of the active card: `clamp(130px, 46vw, 215px)` × `clamp(185px, 42vh, 370px)`.
+- Visually distinct from active: `opacity: 0.45`, `filter: saturate(0.35)`, `pointer-events: none`, `user-select: none`.
+
+**`src/components/Carousel/Carousel.tsx`**
+- Horizontally scrollable flex row: past cards on the left, active card slot on the right.
+- `useLayoutEffect` jumps instantly to the end on mount — ensures the active card is always visible when the game loads or a save is resumed, with no visible scroll.
+- `useEffect` watching `history.length` triggers a smooth scroll to the end 80ms after a new card is added (delay lets the past card entrance animation start first).
+- `AnimatePresence initial={false}` on past cards: existing history loaded from a save renders without animation; only newly appended entries animate in (`opacity 0→1`, `x 24→0`, `scale 0.92→1`, 0.28s).
+- Accepts `children` for the active card slot, keeping card advance animation logic in `GameScreen`.
+
+**`src/components/GameScreen.tsx`**
+- Replaced centered `AnimatePresence` layout with `<Carousel history={engine.history}>`.
+- Active `EventCard` + its `AnimatePresence` (card advance slide) passed as children to `Carousel`.
+- Card advance exit animation tightened: `x: -60` (was -80), `duration: 0.22` (was 0.24) to feel snappier alongside the past card appearing.
+
+---
+
 ## Phase 3 — Core Card UI
 **Goal:** EventCard with flip animation, CardFront/CardBack components, GameScreen wiring, ending screen.
 
