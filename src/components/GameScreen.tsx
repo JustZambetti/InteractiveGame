@@ -9,12 +9,14 @@ import { Carousel } from './Carousel/Carousel';
 
 interface GameScreenProps {
   story: Story;
+  /** Set when starting a fresh game on a specific slot. Null when resuming. */
+  newGameSlotId: 1 | 2 | 3 | null;
+  onReturnToTitle: () => void;
 }
 
 const EASE_IN = 'easeIn' as const;
 const EASE_OUT = 'easeOut' as const;
 
-// Active card: slides in from the right, exits to the left.
 const cardAdvanceVariants = {
   initial: { x: 80, opacity: 0, scale: 0.95 },
   animate: {
@@ -27,16 +29,14 @@ const cardAdvanceVariants = {
   },
 };
 
-export function GameScreen({ story }: GameScreenProps) {
+export function GameScreen({ story, newGameSlotId, onReturnToTitle }: GameScreenProps) {
   const engine = useStoryEngine(story);
   const setCardPhase = useGameStore((s) => s.setCardPhase);
-  const currentEventId = useGameStore((s) => s.currentEventId);
 
-  // Phase 3/4: auto-start on slot 1 if no game is active.
-  // TitleScreen (Phase 5) will replace this.
+  // Start a fresh game when a new slot is provided (fires only on mount).
   useEffect(() => {
-    if (!currentEventId) {
-      engine.startNewGame(1);
+    if (newGameSlotId !== null) {
+      engine.startNewGame(newGameSlotId);
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -48,7 +48,7 @@ export function GameScreen({ story }: GameScreenProps) {
     );
   }
 
-  // ── Ending screen ─────────────────────────────────────────────────────────
+  // ── Ending screen ──────────────────────────────────────────────────────────
   if (isEndingEvent(engine.currentEvent)) {
     const ending = engine.currentEvent;
     return (
@@ -83,7 +83,7 @@ export function GameScreen({ story }: GameScreenProps) {
 
           <div className="flex flex-col gap-3 w-full pt-2">
             <button
-              onClick={() => engine.startNewGame(1)}
+              onClick={onReturnToTitle}
               className="
                 w-full min-h-[52px] font-serif text-sm text-[#c8b896]
                 bg-[#251e15] border border-[#5c4a2a] rounded-lg
@@ -101,7 +101,25 @@ export function GameScreen({ story }: GameScreenProps) {
 
   // ── Game screen with carousel ──────────────────────────────────────────────
   return (
-    <div className="min-h-dvh flex flex-col justify-center overflow-hidden">
+    <div className="relative min-h-dvh flex flex-col justify-center overflow-hidden">
+      {/* Menu button — returns to title screen */}
+      <button
+        onClick={onReturnToTitle}
+        aria-label="Return to title"
+        className="
+          absolute top-4 right-4 z-20
+          w-10 h-10 flex items-center justify-center
+          text-[#5c4a2a] hover:text-[#a07820]
+          transition-colors duration-150
+        "
+      >
+        <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
+          <rect y="0"  width="20" height="2" rx="1" fill="currentColor" />
+          <rect y="6"  width="14" height="2" rx="1" fill="currentColor" />
+          <rect y="12" width="20" height="2" rx="1" fill="currentColor" />
+        </svg>
+      </button>
+
       <Carousel history={engine.history}>
         <AnimatePresence mode="wait">
           <motion.div

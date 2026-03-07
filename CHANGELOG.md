@@ -30,6 +30,36 @@ Entries are organized by development phase, then by commit.
 
 ---
 
+## Phase 5 — Title Screen & Save Slots
+**Goal:** Title screen with 3 save slots, screen routing, return-to-title flow.
+
+### Commit: `(pending)` — Phase 5: title screen, save slots, screen routing
+
+**`src/components/TitleScreen/SaveSlotCard.tsx`**
+- Three states: empty (New Game button), filled (Resume + Delete buttons), confirming-delete (inline Cancel/Delete confirmation — no modal needed).
+- `formatRelativeTime` renders human-friendly timestamps ("just now", "5m ago", "3h ago", "2d ago", or locale date).
+- Filled slot shows: last event text (2-line clamp), event count, relative save time.
+- Delete button styled in muted red; destructive action requires inline confirmation before firing.
+
+**`src/components/TitleScreen/TitleScreen.tsx`**
+- Cover image (38vh, bottom-edge vignette), story title + author, staggered entrance animations (cover 0s, title 0.15s delay, slots 0.28s delay).
+- Receives `onNewGame(slotId)` and `onResume(slotId)` callbacks; delegates delete to `useSavesStore` directly.
+- Fully scrollable for small screens.
+
+**`src/App.tsx`**
+- Screen routing: `'title' | 'game'` state, initialised from `currentEventId` so in-progress games resume directly without showing the title screen.
+- `handleNewGame(slotId)`: sets `newGameSlotId`, navigates to game.
+- `handleResume(slotId)`: calls `loadFromSave` on the store, navigates to game.
+- `handleReturnToTitle`: calls `resetGame()` (clears runtime state; save data in `savesStore` is unaffected), navigates to title.
+- `AnimatePresence mode="wait"` with opacity fade (0.3s) between title and game.
+
+**`src/components/GameScreen.tsx`**
+- Removed Phase 3/4 auto-start. Now receives `newGameSlotId: 1 | 2 | 3 | null` prop; calls `engine.startNewGame(newGameSlotId)` on mount only if not null (resume path leaves store untouched).
+- Added `onReturnToTitle` prop wired to a minimal hamburger SVG button (top-right, `z-20`).
+- Ending screen "Play Again" button now calls `onReturnToTitle` instead of `startNewGame`, returning the player to the save slot selector.
+
+---
+
 ## Phase 4 — Carousel
 **Goal:** Horizontal scrollable carousel showing past event cards alongside the active card.
 
