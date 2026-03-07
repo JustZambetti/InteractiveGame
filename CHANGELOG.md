@@ -33,4 +33,29 @@ Entries are organized by development phase, then by commit.
 ## Phase 2 — Story Engine Tests + useStoryEngine Hook
 **Goal:** Full unit test coverage of all engine modules; `useStoryEngine` hook wiring engine to stores.
 
-<!-- Entries added below as commits land -->
+### Commit: `(pending)` — Phase 2: engine unit tests and useStoryEngine hook
+
+**Vitest setup:**
+- Added `vitest` and `@vitest/ui` as dev dependencies.
+- Created `vitest.config.ts` (separate from `vite.config.ts`) with `environment: 'node'` and `include: ['src/**/*.test.ts']`.
+- Added `test` and `test:watch` npm scripts.
+
+**Engine unit tests — 48 tests, 4 suites, all passing:**
+- `conditionEvaluator.test.ts` (18 tests): all comparison operators (`>`, `>=`, `<`, `<=`, `==`, `!=`), logical operators (`and`, `or`, `not`), nested compound conditions, two-literal comparison, unknown state variable warning, unknown operator warning.
+- `stateManager.test.ts` (13 tests): `buildInitialState` extraction and immutability, `applyStateChanges` positive/negative delta, max clamp, min clamp, uncapped numeric, boolean direct set, string direct set, multi-field changes, immutability of input, unknown key warning.
+- `graphTraverser.test.ts` (8 tests): first condition match, null-condition fallback, single-outcome choice, unknown choice ID, no-match warning, `resolveOutcomeChanges` matching/missing/empty cases.
+- `pathReplayer.test.ts` (9 tests): empty path, single choice with state advance, automatic narrative event traversal, state-dependent branching, full two-choice path, stopping at ending events, history correctness, invalid event ID, invalid choice ID.
+
+**Type improvements:**
+- `graphTraverser.ts`: extracted `OutcomeResult` type (pure consequence data) to decouple it from the store's `ResolvedOutcome`.
+- `gameStore.ts`: `ResolvedOutcome` now includes `choiceId` and `choiceLabel` (full pending state for the card back face); added `loadFromSave` action.
+
+**`src/hooks/useStoryEngine.ts`:**
+- Orchestrates the full game loop: `selectChoice` → flip → `confirmConsequence` → advance → auto-save.
+- `selectChoice(choiceId)`: resolves outcome branch, preloads consequence image immediately, sets `cardPhase = 'flipping'`, stores `pendingOutcome`.
+- `confirmConsequence()`: applies `stateChanges` (with clamping), records `HistoryEntry`, advances `currentEventId`, triggers auto-save.
+- `continueNarrative()`: advances narrative events, records history, triggers auto-save.
+- `startNewGame(slotId)`: initialises fresh state from story's `initialState`, assigns save slot.
+- `loadSave(slotId)`: restores full state from a `SaveSlot`.
+- Lookahead preload: on every `currentEventId` change, preloads all reachable consequence and next-event images.
+- Returns `{ currentEvent, cardPhase, isEnding, isNarrative, isChoice, selectChoice, confirmConsequence, continueNarrative, startNewGame, loadSave }`.

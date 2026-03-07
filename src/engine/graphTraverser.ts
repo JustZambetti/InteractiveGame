@@ -1,6 +1,12 @@
 import type { ChoiceEvent, StoryState, Outcome } from '../types/story';
-import type { ResolvedOutcome } from '../store/gameStore';
 import { evaluateCondition } from './conditionEvaluator';
+
+/** Bare outcome data returned by the traverser — no choice metadata. */
+export interface OutcomeResult {
+  consequenceText: string;
+  consequenceImage: string;
+  nextEventId: string;
+}
 
 /**
  * Given a choice ID and current state, find the first outcome whose
@@ -12,7 +18,7 @@ export function resolveOutcome(
   event: ChoiceEvent,
   choiceId: string,
   state: StoryState
-): ResolvedOutcome | null {
+): OutcomeResult | null {
   const choice = event.choices.find((c) => c.id === choiceId);
   if (!choice) {
     console.warn(`[graphTraverser] Choice "${choiceId}" not found on event "${event.id}"`);
