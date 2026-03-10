@@ -1,19 +1,26 @@
-import { useRef, useEffect, useLayoutEffect, type ReactNode } from 'react';
+import { useRef, useEffect, useLayoutEffect, useState, type ReactNode } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { HistoryEntry } from '../../types/story';
 import { PastCard } from './PastCard';
+import { GoToCurrentButton } from '../UI/GoToCurrentButton';
 
 interface CarouselProps {
   history: HistoryEntry[];
-  /** The active EventCard wrapped in its advance AnimatePresence — provided by GameScreen. */
+  /** The active EventCard (wrapped in its AnimatePresence) — provided by GameScreen. */
   children: ReactNode;
 }
 
-export function Carousel({ history, children }: CarouselProps) {
-  const scrollRef = useRef<HTMLDivElement>(null);
+// Half the space on each side of a card so it snaps to the center of the viewport.
+// Matches EventCard dimensions: 88vw capped at 420px.
+const SIDE_PAD = 'calc((100vw - min(88vw, 420px)) / 2)';
 
-  // On first render: jump to the end instantly (no animation) so the active
-  // card is always visible, even when resuming a save with many past cards.
+export function Carousel({ history, children }: CarouselProps) {
+  const scrollRef     = useRef<HTMLDivElement>(null);
+  const currentSlotRef = useRef<HTMLDivElement>(null);
+  const [showGoToCurrent, setShowGoToCurrent] = useState(false);
+
+  // On first render: jump to the end instantly so the active card is always
+  // in view even when resuming a save with many past cards.
   useLayoutEffect(() => {
     const el = scrollRef.current;
     if (el) el.scrollLeft = el.scrollWidth;
@@ -23,54 +30,82 @@ export function Carousel({ history, children }: CarouselProps) {
   useEffect(() => {
     const el = scrollRef.current;
     if (!el || history.length === 0) return;
-    // Small delay so the past card entrance animation has started before we scroll.
     const timer = setTimeout(() => {
       el.scrollTo({ left: el.scrollWidth, behavior: 'smooth' });
     }, 80);
     return () => clearTimeout(timer);
   }, [history.length]);
 
-  return (
-    <div
-      ref={scrollRef}
-      role="region"
-      aria-label="Story history"
-      className="w-screen overflow-x-auto overflow-y-visible scrollbar-none"
-      style={{ WebkitOverflowScrolling: 'touch' }}
-    >
-      {/* Inner row — sized to its content so the scroll container knows its full width. */}
-      <div
-        className="flex items-center gap-3 py-6"
-        style={{
-          minWidth: 'max-content',
-          // Leading gap before first past card; trailing gap after active card.
-          paddingLeft: '1rem',
-          paddingRight: '7vw',
-        }}
-      >
-        {/* Past cards — AnimatePresence initial={false} prevents the entire
-            history from animating in when loading from a save. Only newly
-            appended entries get the entrance animation. */}
-        <AnimatePresence initial={false}>
-          {history.map((entry, i) => (
-            <motion.div
-              // eventId + index: stable for append-only history; handles loops.
-              key={`${entry.eventId}-${i}`}
-              initial={{ opacity: 0, x: 24, scale: 0.92 }}
-              animate={{ opacity: 1, x: 0, scale: 1 }}
-              transition={{ duration: 0.28, ease: 'easeOut' }}
-              className="shrink-0"
-            >
-              <PastCard entry={entry} />
-            </motion.div>
-          ))}
-        </AnimatePresence>
+  // Show the "go to current" floating button whenever the active card slot is
+  // not visible in the scroll container.
+  useEffect(() => {
+    const slot = currentSlotRef.current;
+    if (!slot) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowGoToCurrent(!entry.isIntersecting),
+      { threshold: 0.8 },
+    );
+    observer.observe(slot);
+    return () => observer.disconnect();
+  }, []);
 
-        {/* Active card slot — children is the AnimatePresence + EventCard from GameScreen */}
-        <div className="shrink-0">
-          {children}
+  function scrollToCurrent() {
+    scrollRef.current?.scrollTo({ left: scrollRef.current.scrollWidth, behavior: 'smooth' });
+  }
+
+  return (
+    <div className="relative">
+      <div
+        ref={scrollRef}
+        role="region"
+        aria-label="Story history"
+        className="w-screen overflow-x-auto scrollbar-none"
+        style={{ WebkitOverflowScrolling: 'touch', scrollSnapType: 'x mandatory' }}
+      >
+        {/* Inner flex row — sized to its content. */}
+        <div className="flex items-center gap-6 py-6" style={{ width: 'max-content' }}>
+
+          {/* Leading spacer: centers the first card in the viewport. */}
+          <div aria-hidden="true" style={{ flexShrink: 0, width: SIDE_PAD }} />
+
+          {/* Past cards — AnimatePresence initial={false} prevents the entire
+              history from animating in when loading from a save. Only newly
+              appended entries animate. */}
+          <AnimatePresence initial={false}>
+            {history.map((entry, i) => (
+              <motion.div
+                key={`${entry.eventId}-${i}`}
+                initial={{ opacity: 0, x: 24, scale: 0.92 }}
+                animate={{ opacity: 1, x: 0, scale: 1 }}
+                transition={{ duration: 0.28, ease: 'easeOut' }}
+                className="shrink-0"
+                style={{ scrollSnapAlign: 'center' }}
+              >
+                <PastCard entry={entry} />
+              </motion.div>
+            ))}
+          </AnimatePresence>
+
+          {/* Active card slot — children is the AnimatePresence + EventCard from GameScreen. */}
+          <div
+            ref={currentSlotRef}
+            className="shrink-0"
+            style={{ scrollSnapAlign: 'center' }}
+          >
+            {children}
+          </div>
+
+          {/* Trailing spacer: allows the last card to snap to center. */}
+          <div aria-hidden="true" style={{ flexShrink: 0, width: SIDE_PAD }} />
         </div>
       </div>
+
+      {/* Floating button — only when there are past cards and user scrolled away. */}
+      <AnimatePresence>
+        {showGoToCurrent && history.length > 0 && (
+          <GoToCurrentButton onClick={scrollToCurrent} />
+        )}
+      </AnimatePresence>
     </div>
   );
 }

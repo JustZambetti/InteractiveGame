@@ -51,7 +51,6 @@ export function GameScreen({
   const currentEventId = useGameStore((s) => s.currentEventId);
   const storyState = useGameStore((s) => s.storyState);
   const history = useGameStore((s) => s.history);
-  const activeSaveSlot = useGameStore((s) => s.activeSaveSlot);
   const saves = useSavesStore();
 
   const isReplayMode = replayChoicePath.length > 0;
@@ -172,30 +171,16 @@ export function GameScreen({
             </div>
           )}
 
-          {/* Hamburger / return to title — slot badge shows active save slot */}
+          {/* Hamburger / return to title */}
           <button
             onClick={onReturnToTitle}
-            aria-label={`Menu${activeSaveSlot !== null ? ` — Slot ${activeSaveSlot}` : ''}`}
+            aria-label="Menu"
             className="
-              relative w-10 h-10 flex items-center justify-center
+              w-10 h-10 flex items-center justify-center
               text-[#5c4a2a] hover:text-[#a07820]
               transition-colors duration-150
             "
           >
-            {activeSaveSlot !== null && (
-              <span
-                aria-hidden="true"
-                className="
-                  absolute top-0.5 right-0.5
-                  w-4 h-4 rounded-full
-                  bg-[#5c4a2a] border border-[#0f0e0d]
-                  text-[#e8e0d0] text-[9px] font-serif leading-none
-                  flex items-center justify-center
-                "
-              >
-                {activeSaveSlot}
-              </span>
-            )}
             <svg width="20" height="14" viewBox="0 0 20 14" fill="none" aria-hidden="true">
               <rect y="0"  width="20" height="2" rx="1" fill="currentColor" />
               <rect y="6"  width="14" height="2" rx="1" fill="currentColor" />

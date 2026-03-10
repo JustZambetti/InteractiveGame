@@ -8,7 +8,7 @@ interface CardBackProps {
 
 export function CardBack({ outcome, onContinue }: CardBackProps) {
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col flex-1 min-h-0">
       {/* Consequence image — same proportions as front */}
       <div className="shrink-0" style={{ height: '45%' }}>
         <ImageWithShimmer

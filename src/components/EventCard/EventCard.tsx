@@ -80,17 +80,17 @@ export function EventCard({
       role="article"
       aria-label="Story card"
       className="
-        relative flex flex-col
+        flex flex-col
         bg-[#1a1714] border border-[#5c4a2a] rounded-2xl overflow-hidden
         shadow-[0_8px_40px_rgba(0,0,0,0.7)]
       "
-      style={{ width: '88vw', maxWidth: 420, height: '72vh', maxHeight: 640 }}
+      style={{ padding: 16, width: '88vw', maxWidth: 420, height: '72vh', maxHeight: 640 }}
     >
       <AnimatePresence mode="wait" onExitComplete={handleExitComplete}>
         {showFront ? (
           <motion.div
             key="front"
-            className="absolute inset-0"
+            className="flex-1 flex flex-col min-h-0"
             variants={faceExitVariants}
             exit="exit"
           >
@@ -107,7 +107,7 @@ export function EventCard({
         ) : (
           <motion.div
             key="back"
-            className="absolute inset-0"
+            className="flex-1 flex flex-col min-h-0"
             initial={faceEnterVariants.initial}
             animate={faceEnterVariants.animate}
           >
