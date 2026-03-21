@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion';
 import type { Story } from '../../types/story';
 import { useSavesStore } from '../../store/savesStore';
+import { useLanguageStore } from '../../store/languageStore';
 import { SaveSlotCard } from './SaveSlotCard';
 
 interface TitleScreenProps {
@@ -11,9 +12,26 @@ interface TitleScreenProps {
 
 export function TitleScreen({ story, onNewGame, onResume }: TitleScreenProps) {
   const { slots, deleteSlot } = useSavesStore();
+  const { language, setLanguage } = useLanguageStore();
 
   return (
     <div className="min-h-dvh flex flex-col bg-[#0f0e0d] overflow-y-auto">
+      {/* Language selector */}
+      <div className="absolute top-3 right-3 z-10 flex gap-1">
+        {(['en', 'it'] as const).map((lang) => (
+          <button
+            key={lang}
+            onClick={() => setLanguage(lang)}
+            className={`px-2 py-1 text-xs font-serif rounded border transition-colors
+              ${language === lang
+                ? 'bg-[#3d2e1a] border-[#a07820] text-[#f0d88a]'
+                : 'bg-[#251e15] border-[#5c4a2a] text-[#5c4a2a] hover:text-[#c8b896] hover:border-[#7a6035]'
+              }`}
+          >
+            {lang.toUpperCase()}
+          </button>
+        ))}
+      </div>
       {/* Cover image */}
       <motion.div
         className="relative w-full shrink-0 overflow-hidden"

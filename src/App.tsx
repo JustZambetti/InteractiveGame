@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import type { Story } from './types/story';
-import storyData from '../public/story.json';
+import storyEn from '../public/story.json';
+import storyIt from '../public/story.it.json';
 import { useGameStore } from './store/gameStore';
 import { useSavesStore } from './store/savesStore';
+import { useLanguageStore } from './store/languageStore';
 import { buildInitialState } from './engine/stateManager';
 import { preloadStoryPath } from './engine/imagePreloader';
 import { TitleScreen } from './components/TitleScreen/TitleScreen';
 import { GameScreen } from './components/GameScreen';
 
-const story = storyData as unknown as Story;
+const stories: Record<string, Story> = {
+  en: storyEn as unknown as Story,
+  it: storyIt as unknown as Story,
+};
 
 type Screen = 'title' | 'game';
 
@@ -28,6 +33,8 @@ export default function App() {
   const resetGame = useGameStore((s) => s.resetGame);
   const loadFromSave = useGameStore((s) => s.loadFromSave);
   const { slots } = useSavesStore();
+  const language = useLanguageStore((s) => s.language);
+  const story = stories[language];
 
   // Parse replay path from URL once; initialise game state for replay if found.
   const [replayChoicePath] = useState<string[]>(() => {
