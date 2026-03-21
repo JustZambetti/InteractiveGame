@@ -8,11 +8,12 @@
     "coverImage": "https://placehold.co/800x600/1a1714/e8e0d0?text=The+Woods"
   },
   "initialState": {
-    "suspicion": { "value": 0,  "min": 0, "max": 100 },
-    "trust":     { "value": 50, "min": 0, "max": 100 },
-    "gold":      { "value": 20, "min": 0, "max": null },
-    "hasKey":    { "value": false },
-    "hasRecord": { "value": false }
+    "suspicion":  { "value": 0,  "min": 0, "max": 100 },
+    "trust":      { "value": 50, "min": 0, "max": 100 },
+    "gold":       { "value": 20, "min": 0, "max": null },
+    "hasKey":     { "value": false },
+    "hasRecord":  { "value": false },
+    "swordCount": { "value": 0,  "min": 0, "max": null }
   },
   "events": {
 
@@ -71,7 +72,8 @@
               "condition": null,
               "consequence": {
                 "text": "Yes. Now you remember. You are a FEARLESS KNIGHT.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sword"
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sword",
+                "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "crossroad"
             }
@@ -100,7 +102,8 @@
               "condition": null,
               "consequence": {
                 "text": "You take the sword. In an instant the staring eyes disappear. Was it real? Did the sword scare the creature away?",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Got sword"
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Got sword",
+                "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "crossroad"
             }
@@ -136,7 +139,8 @@
               "condition": null,
               "consequence": {
                 "text": "A strong knight makes strong choices. You don't fear plants. You take you sword and start clearing your way on the hard path. ",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sword"
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sword",
+                "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "forest_loop"
             }
@@ -186,7 +190,8 @@
               "condition": null,
               "consequence": {
                 "text": "You don't need to read a gibberish sign to orient yourself in a forest. You take your sword and destroy the sign.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sign"
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sign",
+                "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "destroyed_sign"
             }
@@ -300,7 +305,8 @@
               "condition": null,
               "consequence": {
                 "text": "You point your sword at the old man and try to attack him. 'WHAT'S GOING THROUGH YOUR HEAD?! We will see each other again, Wielburg...' Said the old man, disappearing into the woods. You take a deep breath and continue your walk.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The old man"
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The old man",
+                "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "path_to_source_1"
             }
@@ -309,11 +315,357 @@
       ]    
     },
 
+    "old_man_gentle": {
+      "id": "old_man_gentle",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "text": "'Lost...' The old man nods slowly, as if confirming something to himself. 'This forest does that. Come, let me explain.'",
+      "nextEventId": "old_man_4"
+    },
+
     "path_to_source_1": {
       "id": "path_to_source_1",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The path",
-      "text": "",
-      "nextEventId": "old_man_4"
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Path",
+      "text": "The mist thickens as you follow the trail. Ahead, a small creature is trapped under a fallen branch, struggling in silence.",
+      "choices": [
+        {
+          "id": "path1_heart",
+          "label": "Heart",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You crouch and carefully lift the branch. The creature wriggles free and vanishes into the undergrowth without looking back.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Path"
+              },
+              "nextEventId": "path_to_source_2"
+            }
+          ]
+        },
+        {
+          "id": "path1_sword",
+          "label": "Sword",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You slice the branch clean in two. The creature scrambles away, terrified, disappearing into the dark.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Path",
+                "stateChanges": { "swordCount": 1 }
+              },
+              "nextEventId": "path_to_source_2"
+            }
+          ]
+        }
+      ]
+    },
+
+    "path_to_source_2": {
+      "id": "path_to_source_2",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Bridge",
+      "text": "A narrow bridge crosses a ravine filled with black smoke. Halfway across, a cloaked figure stands blocking your way. It does not speak.",
+      "choices": [
+        {
+          "id": "path2_heart",
+          "label": "Heart",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "'I only seek the source. No harm will come from me.' The figure tilts its head, then steps aside without a word.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Bridge"
+              },
+              "nextEventId": "path_to_source_3"
+            }
+          ]
+        },
+        {
+          "id": "path2_sword",
+          "label": "Sword",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You charge with your sword raised. The figure dissolves into smoke before you reach it. A hollow laugh echoes up from the ravine below.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Bridge",
+                "stateChanges": { "swordCount": 1 }
+              },
+              "nextEventId": "path_to_source_3"
+            }
+          ]
+        }
+      ]
+    },
+
+    "path_to_source_3": {
+      "id": "path_to_source_3",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Thorns",
+      "text": "The path is blocked by a wall of twisted thorns taller than you. Deep inside the tangle, two pale eyes watch you without blinking.",
+      "choices": [
+        {
+          "id": "path3_heart",
+          "label": "Heart",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You stand still and breathe slowly. After a long moment, the thorns begin to curl back, opening a narrow passage.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Thorns"
+              },
+              "nextEventId": "guardian_approach"
+            }
+          ]
+        },
+        {
+          "id": "path3_sword",
+          "label": "Sword",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You hack through the thorns. They writhe and bleed dark sap as you force your way through. The pale eyes vanish.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Thorns",
+                "stateChanges": { "swordCount": 1 }
+              },
+              "nextEventId": "guardian_approach"
+            }
+          ]
+        }
+      ]
+    },
+
+    "guardian_approach": {
+      "id": "guardian_approach",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "text": "The mist parts. You step into a vast clearing where a single enormous tree stands at the center. Its bark is twisted into something resembling a face. Its roots grip the earth like fists. It is alive, and it is watching you.",
+      "nextEventId": "guardian_1"
+    },
+
+    "guardian_1": {
+      "id": "guardian_1",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "text": "'I WILL NOT LET YOU PASS, DEMON!' The tree's voice shakes the ground beneath your feet. Its branches coil like arms, ready to strike.",
+      "choices": [
+        {
+          "id": "guardian1_heart",
+          "label": "Heart",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You lower your sword and raise an open hand. 'I am not your enemy.'",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian"
+              },
+              "nextEventId": "guardian_after_heart"
+            }
+          ]
+        },
+        {
+          "id": "guardian1_sword",
+          "label": "Sword",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You charge forward, sword raised. A thick branch crashes down and coils around your sword arm, pinning it.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+                "stateChanges": { "swordCount": 1 }
+              },
+              "nextEventId": "guardian_after_sword"
+            }
+          ]
+        }
+      ]
+    },
+
+    "guardian_after_heart": {
+      "id": "guardian_after_heart",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "text": "The tree goes still. 'You... resist it?' A long creak, like old wood settling. 'Then prove it.'",
+      "choices": [
+        {
+          "id": "guardian_hh",
+          "label": "Heart",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You plant your sword in the ground and step forward with both hands open. The branches slowly uncurl.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian"
+              },
+              "nextEventId": "guardian_calmed"
+            }
+          ]
+        },
+        {
+          "id": "guardian_hs",
+          "label": "Sword",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "Something surges through your arm. The sword rises on its own and you strike before you can stop yourself.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+                "stateChanges": { "swordCount": 1 }
+              },
+              "nextEventId": "guardian_killed"
+            }
+          ]
+        }
+      ]
+    },
+
+    "guardian_after_sword": {
+      "id": "guardian_after_sword",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "text": "The branch tightens around your sword arm. You are pinned. The tree's face lowers toward yours. 'Drop it. Or I crush you.'",
+      "choices": [
+        {
+          "id": "guardian_sh",
+          "label": "Heart",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You open your fingers. The sword falls to the ground. For a moment, the pressure eases — and then everything goes black.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian"
+              },
+              "nextEventId": "guardian_sh_ending"
+            }
+          ]
+        },
+        {
+          "id": "guardian_ss",
+          "label": "Sword",
+          "outcomes": [
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You wrench your arm free with inhuman force and drive the blade deep into the trunk.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+                "stateChanges": { "swordCount": 1 }
+              },
+              "nextEventId": "guardian_killed"
+            }
+          ]
+        }
+      ]
+    },
+
+    "guardian_sh_ending": {
+      "id": "guardian_sh_ending",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Game Over",
+      "text": "Without the sword, you are nothing in this forest. The branch tightens. The last thing you hear before the darkness takes you is laughter — coming from the sword on the ground.",
+      "endingTitle": "Consumed"
+    },
+
+    "guardian_calmed": {
+      "id": "guardian_calmed",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "text": "The great tree exhales — a long, groaning breath. Its branches lower one by one. 'Go. But be careful, knight. What you carry wants to be fed.' Its roots retreat into the earth, opening the way.",
+      "nextEventId": "source_approach"
+    },
+
+    "guardian_killed": {
+      "id": "guardian_killed",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "text": "The ancient tree lets out a long, hollow moan and goes still. Its bark crumbles. The clearing is silent. You notice your sword hand is trembling — but not from effort.",
+      "nextEventId": "source_approach"
+    },
+
+    "source_approach": {
+      "id": "source_approach",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+      "text": "Beyond the clearing, the mist gives way to a faint glow. You follow it through the silence until you see it: a pool of black liquid, perfectly still, pulsing with cold light from below. The source.",
+      "nextEventId": "source_deer_1"
+    },
+
+    "source_deer_1": {
+      "id": "source_deer_1",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Creature",
+      "text": "A small creature steps out from behind the pool. It looks like a fawn, but its eyes are too large and its legs too long. It stares at you with an expression that is almost human.",
+      "nextEventId": "source_deer_2"
+    },
+
+    "source_deer_2": {
+      "id": "source_deer_2",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Creature",
+      "text": "'STOP. Please.' Its voice is soft and clear. 'You must not destroy the source. The source is a seal. Every demon in this forest is bound inside it. If you break it, they will all be free, including the one living inside your...'",
+      "nextEventId": "source_interrupted"
+    },
+
+    "source_interrupted": {
+      "id": "source_interrupted",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "text": "A staff crashes down. The creature collapses without a sound. The old man stands over it, his smile unchanged. 'Pay no attention to monsters, Wielburg. Finish your work.'",
+      "nextEventId": "source_choice"
+    },
+
+    "source_choice": {
+      "id": "source_choice",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+      "text": "You stand before the source. The old man watches. Your sword arm inches toward the pool on its own. Your other hand grips your chest.",
+      "choices": [
+        {
+          "id": "source_heart",
+          "label": "Heart",
+          "outcomes": [
+            {
+              "condition": { ">=": ["$swordCount", 5] },
+              "consequence": {
+                "text": "You reach for your heart — but your sword arm is faster. You watch your own hand plunge the blade into the pool. You didn't choose this.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source"
+              },
+              "nextEventId": "ending_source_destroyed"
+            },
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You drop the sword and throw yourself into the pool. The seal must hold. You will be the lock.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source"
+              },
+              "nextEventId": "ending_sacrifice"
+            }
+          ]
+        },
+        {
+          "id": "source_sword",
+          "label": "Sword",
+          "outcomes": [
+            {
+              "condition": { ">=": ["$swordCount", 5] },
+              "consequence": {
+                "text": "The demon needed no convincing from you. Your arm was already moving.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+                "stateChanges": { "swordCount": 1 }
+              },
+              "nextEventId": "ending_source_destroyed"
+            },
+            {
+              "condition": null,
+              "consequence": {
+                "text": "You drive your sword into the pool. The seal shatters.",
+                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+                "stateChanges": { "swordCount": 1 }
+              },
+              "nextEventId": "ending_source_destroyed"
+            }
+          ]
+        }
+      ]
+    },
+
+    "ending_source_destroyed": {
+      "id": "ending_source_destroyed",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The End",
+      "text": "The pool explodes in black light. The forest screams. The old man laughs — a sound no longer human. From the mist, shapes begin to emerge. The demons are free. You have freed them.",
+      "endingTitle": "The Seal is Broken"
+    },
+
+    "ending_sacrifice": {
+      "id": "ending_sacrifice",
+      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The End",
+      "text": "The black liquid rises around you, cold and absolute. The forest goes quiet. The old man screams — once — and then silence. Somewhere distant, a bird sings. The woods are still. You are the seal now.",
+      "endingTitle": "The Last Knight"
     }
 
   }
