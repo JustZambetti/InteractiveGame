@@ -5,7 +5,7 @@
     "version": "1.0",
     "startEventId": "intro",
     "author": "Giorgio Zambetti",
-    "coverImage": "https://placehold.co/800x600/1a1714/e8e0d0?text=The+Woods"
+    "coverImage": "/images/river.png"
   },
   "initialState": {
     "suspicion":  { "value": 0,  "min": 0, "max": 100 },
