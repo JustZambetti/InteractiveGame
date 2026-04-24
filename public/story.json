@@ -114,7 +114,7 @@
 
     "crossroad": {
       "id": "crossroad",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Crossroad",
+      "image": "/images/crossroads.jpg",
       "text": "You look around. The sun is up, but how long before it's dark? You don't know. You notice you are in front of a crossroad. One path is full of brambles, while the other seems safer...",
       "choices": [
         {
@@ -125,7 +125,7 @@
               "condition": null,
               "consequence": {
                 "text": "You take the safer path. If brambles don't grow here, probably more peolpe are walking on it.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Peace"
+                "image": "/images/path.png"
               },
               "nextEventId": "forest_loop"
             }
@@ -139,33 +139,33 @@
               "condition": null,
               "consequence": {
                 "text": "A strong knight makes strong choices. You don't fear plants. You take you sword and start clearing your way on the hard path. ",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sword",
+                "image": "/images/hard-path.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "forest_loop"
             }
           ]
         }
-      ]        
+      ]
     },
 
     "forest_loop": {
       "id": "forest_loop",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Walking",
+      "image": "/images/path.png",
       "text": "You keep walking. Following the path. You have been walking for a lot.",
       "nextEventId": "forest_loop_sign"
     },
 
     "forest_loop_2": {
       "id": "forest_loop_2",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Walking",
+      "image": "/images/path.png",
       "text": "Yes, this must be the right direction!",
       "nextEventId": "forest_loop"
     },
 
      "forest_loop_sign": {
       "id": "forest_loop_sign",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sign",
+      "image": "/images/sign.png",
       "text": "A SIGN! But what does it say?",
       "choices": [
         {
@@ -176,7 +176,7 @@
               "condition": null,
               "consequence": {
                 "text": "You squint your eyes and try to read. It's clear, you need to turn left!",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sign"
+                "image": "/images/sign.png"
               },
               "nextEventId": "forest_loop_2"
             }
@@ -190,40 +190,40 @@
               "condition": null,
               "consequence": {
                 "text": "You don't need to read a gibberish sign to orient yourself in a forest. You take your sword and destroy the sign.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sign",
+                "image": "/images/bleeding-sign.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "destroyed_sign"
             }
           ]
         }
-      ]        
+      ]
     },
 
    "destroyed_sign": {
       "id": "destroyed_sign",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Bleeding Sign",
+      "image": "/images/bleeding-sign.png",
       "text": "Whait! Why is the sign... bleeding?",
       "nextEventId": "continue_walking"
     },
 
    "continue_walking": {
       "id": "continue_walking",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Forest",
+      "image": "/images/path.png",
       "text": "It's a weird place, but it's getting dark, we cannot lose time on living objects. You continue walking",
       "nextEventId": "old_man"
     },
 
     "old_man": {
       "id": "old_man",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man.png",
       "text": "You notice an old man resting on a staff. He turns his head and stares at you",
       "nextEventId": "old_man_2"
     },
 
     "old_man_2": {
       "id": "old_man_2",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man.png",
       "text": "'I wasn't expecting to see you again...' he says",
       "choices": [
         {
@@ -234,7 +234,7 @@
               "condition": null,
               "consequence": {
                 "text": "'Have we met each other before?' 'It's been a long time, but I will never be able to forget you. But why are you here? You seem... lost.'",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The old man"
+                "image": "/images/old-man.png"
               },
               "nextEventId": "old_man_gentle"
             }
@@ -248,39 +248,39 @@
               "condition": null,
               "consequence": {
                 "text": "'Who are you? How do I get out of the woods?!' You scream. The old man keep staring",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The old man"
+                "image": "/images/old-man.png"
               },
               "nextEventId": "old_man_3"
             }
           ]
         }
-      ]    
+      ]
     },
 
     "old_man_3": {
       "id": "old_man_3",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man-dark.png",
       "text": "The old man smiles at you in an uncanny way",
       "nextEventId": "old_man_4"
     },
 
     "old_man_4": {
       "id": "old_man_4",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/river.png",
       "text": "'This forest is surrounded by a river. Not water. But boiling pitch. And the smoke... it can confuse the mind.' Says the old man",
       "nextEventId": "old_man_5"
     },
 
     "old_man_5": {
       "id": "old_man_5",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man.png",
       "text": "'Oh brave knight, the source of this river is located at the center of this forest, guarderd by a scary monster. Destroy the source and free us from this prison!'",
       "nextEventId": "old_man_6"
     },
 
     "old_man_6": {
       "id": "old_man_6",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man.png",
       "text": "'How to reach it? This forest is alive and it always change. You need to follow the mist. Find the source!'",
       "choices": [
         {
@@ -291,7 +291,7 @@
               "condition": null,
               "consequence": {
                 "text": "The old man points at a path. You take it.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The old man"
+                "image": "/images/old-man.png"
               },
               "nextEventId": "path_to_source_1"
             }
@@ -305,26 +305,26 @@
               "condition": null,
               "consequence": {
                 "text": "You point your sword at the old man and try to attack him. 'WHAT'S GOING THROUGH YOUR HEAD?! We will see each other again, Wielburg...' Said the old man, disappearing into the woods. You take a deep breath and continue your walk.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The old man",
+                "image": "/images/old-man.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "path_to_source_1"
             }
           ]
         }
-      ]    
+      ]
     },
 
     "old_man_gentle": {
       "id": "old_man_gentle",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man.png",
       "text": "'Lost...' The old man nods slowly, as if confirming something to himself. 'This forest does that. Come, let me explain.'",
       "nextEventId": "old_man_4"
     },
 
     "path_to_source_1": {
       "id": "path_to_source_1",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Path",
+      "image": "/images/trapper-animal.png",
       "text": "The mist thickens as you follow the trail. Ahead, a small creature is trapped under a fallen branch, struggling in silence.",
       "choices": [
         {
@@ -335,7 +335,7 @@
               "condition": null,
               "consequence": {
                 "text": "You crouch and carefully lift the branch. The creature wriggles free and vanishes into the undergrowth without looking back.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Path"
+                "image": "/images/trapper-animal.png"
               },
               "nextEventId": "path_to_source_2"
             }
@@ -349,7 +349,7 @@
               "condition": null,
               "consequence": {
                 "text": "You slice the branch clean in two. The creature scrambles away, terrified, disappearing into the dark.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Path",
+                "image": "/images/trapper-animal.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "path_to_source_2"
@@ -361,7 +361,7 @@
 
     "path_to_source_2": {
       "id": "path_to_source_2",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Bridge",
+      "image": "/images/river.png",
       "text": "A narrow bridge crosses a ravine filled with black smoke. Halfway across, a cloaked figure stands blocking your way. It does not speak.",
       "choices": [
         {
@@ -372,7 +372,7 @@
               "condition": null,
               "consequence": {
                 "text": "'I only seek the source. No harm will come from me.' The figure tilts its head, then steps aside without a word.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Bridge"
+                "image": "/images/river.png"
               },
               "nextEventId": "path_to_source_3"
             }
@@ -386,7 +386,7 @@
               "condition": null,
               "consequence": {
                 "text": "You charge with your sword raised. The figure dissolves into smoke before you reach it. A hollow laugh echoes up from the ravine below.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Bridge",
+                "image": "/images/river.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "path_to_source_3"
@@ -398,7 +398,7 @@
 
     "path_to_source_3": {
       "id": "path_to_source_3",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Thorns",
+      "image": "/images/hard-path.png",
       "text": "The path is blocked by a wall of twisted thorns taller than you. Deep inside the tangle, two pale eyes watch you without blinking.",
       "choices": [
         {
@@ -409,7 +409,7 @@
               "condition": null,
               "consequence": {
                 "text": "You stand still and breathe slowly. After a long moment, the thorns begin to curl back, opening a narrow passage.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Thorns"
+                "image": "/images/hard-path.png"
               },
               "nextEventId": "guardian_approach"
             }
@@ -423,7 +423,7 @@
               "condition": null,
               "consequence": {
                 "text": "You hack through the thorns. They writhe and bleed dark sap as you force your way through. The pale eyes vanish.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Thorns",
+                "image": "/images/hard-path.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "guardian_approach"
@@ -595,7 +595,7 @@
 
     "source_interrupted": {
       "id": "source_interrupted",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man-dark.png",
       "text": "A staff crashes down. The creature collapses without a sound. The old man stands over it, his smile unchanged. 'Pay no attention to monsters, Wielburg. Finish your work.'",
       "nextEventId": "source_choice"
     },
