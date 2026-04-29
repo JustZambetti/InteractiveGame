@@ -602,7 +602,7 @@
 
     "source_choice": {
       "id": "source_choice",
-      "image": "/images/source-pool.png",
+      "image": "/images/source-closeup.png",
       "text": "You stand before the source. The old man watches. Your sword arm inches toward the pool on its own. Your other hand grips your chest.",
       "choices": [
         {
@@ -613,7 +613,7 @@
               "condition": { ">=": ["$swordCount", 5] },
               "consequence": {
                 "text": "You reach for your heart — but your sword arm is faster. You watch your own hand plunge the blade into the pool. You didn't choose this.",
-                "image": "/images/source-pool.png"
+                "image": "/images/source-closeup.png"
               },
               "nextEventId": "ending_source_destroyed"
             },
@@ -635,7 +635,7 @@
               "condition": { ">=": ["$swordCount", 5] },
               "consequence": {
                 "text": "The demon needed no convincing from you. Your arm was already moving.",
-                "image": "/images/source-pool.png",
+                "image": "/images/source-closeup.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "ending_source_destroyed"
@@ -644,7 +644,7 @@
               "condition": null,
               "consequence": {
                 "text": "You drive your sword into the pool. The seal shatters.",
-                "image": "/images/source-pool.png",
+                "image": "/images/source-closeup.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "ending_source_destroyed"
@@ -656,7 +656,7 @@
 
     "ending_source_destroyed": {
       "id": "ending_source_destroyed",
-      "image": "/images/source-pool.png",
+      "image": "/images/source-closeup.png",
       "text": "The pool explodes in black light. The forest screams. The old man laughs — a sound no longer human. From the mist, shapes begin to emerge. The demons are free. You have freed them.",
       "endingTitle": "The Seal is Broken"
     },
