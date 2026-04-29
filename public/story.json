@@ -574,21 +574,21 @@
 
     "source_approach": {
       "id": "source_approach",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+      "image": "/images/source-pool.png",
       "text": "Beyond the clearing, the mist gives way to a faint glow. You follow it through the silence until you see it: a pool of black liquid, perfectly still, pulsing with cold light from below. The source.",
       "nextEventId": "source_deer_1"
     },
 
     "source_deer_1": {
       "id": "source_deer_1",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Creature",
+      "image": "/images/deer-creature.png",
       "text": "A small creature steps out from behind the pool. It looks like a fawn, but its eyes are too large and its legs too long. It stares at you with an expression that is almost human.",
       "nextEventId": "source_deer_2"
     },
 
     "source_deer_2": {
       "id": "source_deer_2",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Creature",
+      "image": "/images/deer-creature.png",
       "text": "'STOP. Please.' Its voice is soft and clear. 'You must not destroy the source. The source is a seal. Every demon in this forest is bound inside it. If you break it, they will all be free, including the one living inside your...'",
       "nextEventId": "source_interrupted"
     },
@@ -602,7 +602,7 @@
 
     "source_choice": {
       "id": "source_choice",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+      "image": "/images/source-closeup.png",
       "text": "You stand before the source. The old man watches. Your sword arm inches toward the pool on its own. Your other hand grips your chest.",
       "choices": [
         {
@@ -613,7 +613,7 @@
               "condition": { ">=": ["$swordCount", 5] },
               "consequence": {
                 "text": "You reach for your heart — but your sword arm is faster. You watch your own hand plunge the blade into the pool. You didn't choose this.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source"
+                "image": "/images/source-closeup.png"
               },
               "nextEventId": "ending_source_destroyed"
             },
@@ -621,7 +621,7 @@
               "condition": null,
               "consequence": {
                 "text": "You drop the sword and throw yourself into the pool. The seal must hold. You will be the lock.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source"
+                "image": "/images/source-pool.png"
               },
               "nextEventId": "ending_sacrifice"
             }
@@ -635,7 +635,7 @@
               "condition": { ">=": ["$swordCount", 5] },
               "consequence": {
                 "text": "The demon needed no convincing from you. Your arm was already moving.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+                "image": "/images/source-closeup.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "ending_source_destroyed"
@@ -644,7 +644,7 @@
               "condition": null,
               "consequence": {
                 "text": "You drive your sword into the pool. The seal shatters.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+                "image": "/images/source-closeup.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "ending_source_destroyed"
@@ -656,14 +656,14 @@
 
     "ending_source_destroyed": {
       "id": "ending_source_destroyed",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The End",
+      "image": "/images/source-closeup.png",
       "text": "The pool explodes in black light. The forest screams. The old man laughs — a sound no longer human. From the mist, shapes begin to emerge. The demons are free. You have freed them.",
       "endingTitle": "The Seal is Broken"
     },
 
     "ending_sacrifice": {
       "id": "ending_sacrifice",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The End",
+      "image": "/images/source-pool.png",
       "text": "The black liquid rises around you, cold and absolute. The forest goes quiet. The old man screams — once — and then silence. Somewhere distant, a bird sings. The woods are still. You are the seal now.",
       "endingTitle": "The Sacrifice"
     }
