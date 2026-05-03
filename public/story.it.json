@@ -5,7 +5,7 @@
     "version": "1.0",
     "startEventId": "intro",
     "author": "Giorgio Zambetti",
-    "coverImage": "https://placehold.co/800x600/1a1714/e8e0d0?text=Il+Bosco"
+    "coverImage": "/images/river.png"
   },
   "initialState": {
     "suspicion":  { "value": 0,  "min": 0, "max": 100 },
@@ -115,7 +115,7 @@
 
     "crossroad": {
       "id": "crossroad",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Crossroad",
+      "image": "/images/crossroads.jpg",
       "text": "Ti guardi intorno. Il sole è alto, ma quanto manca al buio? Non lo sai. Noti di trovarti davanti a un bivio. Un sentiero è pieno di rovi, mentre l'altro sembra più sicuro...",
       "choices": [
         {
@@ -126,7 +126,7 @@
               "condition": null,
               "consequence": {
                 "text": "Prendi il sentiero più sicuro. Se qui non crescono i rovi, probabilmente ci camminano più persone.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Peace"
+                "image": "/images/path.png"
               },
               "nextEventId": "forest_loop"
             }
@@ -140,7 +140,7 @@
               "condition": null,
               "consequence": {
                 "text": "Un cavaliere forte fa scelte coraggiose. Non hai paura delle piante. Impugni la spada e inizi a farti strada nel sentiero difficile.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sword",
+                "image": "/images/hard-path.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "forest_loop"
@@ -152,21 +152,21 @@
 
     "forest_loop": {
       "id": "forest_loop",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Walking",
+      "image": "/images/path.png",
       "text": "Continui a camminare. Seguendo il sentiero. Cammini da molto tempo.",
       "nextEventId": "forest_loop_sign"
     },
 
     "forest_loop_2": {
       "id": "forest_loop_2",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Walking",
+      "image": "/images/path.png",
       "text": "Sì, questa deve essere la direzione giusta!",
       "nextEventId": "forest_loop"
     },
 
     "forest_loop_sign": {
       "id": "forest_loop_sign",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sign",
+      "image": "/images/sign.png",
       "text": "UN CARTELLO! Ma cosa dice?",
       "choices": [
         {
@@ -177,7 +177,7 @@
               "condition": null,
               "consequence": {
                 "text": "Socchiudi gli occhi e cerchi di leggere. È chiaro: devi girare a sinistra!",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sign"
+                "image": "/images/sign.png"
               },
               "nextEventId": "forest_loop_2"
             }
@@ -191,7 +191,7 @@
               "condition": null,
               "consequence": {
                 "text": "Non hai bisogno di leggere un cartello incomprensibile per orientarti in una foresta. Impugni la spada e distruggi il cartello.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Sign",
+                "image": "/images/bleeding-sign.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "destroyed_sign"
@@ -203,28 +203,28 @@
 
     "destroyed_sign": {
       "id": "destroyed_sign",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Bleeding Sign",
+      "image": "/images/bleeding-sign.png",
       "text": "Aspetta! Perché il cartello... sanguina?",
       "nextEventId": "continue_walking"
     },
 
     "continue_walking": {
       "id": "continue_walking",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Forest",
+      "image": "/images/path.png",
       "text": "È un posto strano, ma si sta facendo buio, non possiamo perdere tempo con oggetti viventi. Continui a camminare.",
       "nextEventId": "old_man"
     },
 
     "old_man": {
       "id": "old_man",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man.png",
       "text": "Noti un vecchio appoggiato a un bastone. Gira la testa e ti fissa.",
       "nextEventId": "old_man_2"
     },
 
     "old_man_2": {
       "id": "old_man_2",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man.png",
       "text": "'Non mi aspettavo di rivederti...' dice.",
       "choices": [
         {
@@ -235,7 +235,7 @@
               "condition": null,
               "consequence": {
                 "text": "'Ci siamo già incontrati?' 'È passato molto tempo, ma non riuscirò mai a dimenticarti. Ma perché sei qui? Sembri... perso.'",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The old man"
+                "image": "/images/old-man.png"
               },
               "nextEventId": "old_man_gentle"
             }
@@ -249,7 +249,7 @@
               "condition": null,
               "consequence": {
                 "text": "'Chi sei? Come esco da questo bosco?!' Urli. Il vecchio continua a fissarti.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The old man"
+                "image": "/images/old-man.png"
               },
               "nextEventId": "old_man_3"
             }
@@ -260,35 +260,35 @@
 
     "old_man_gentle": {
       "id": "old_man_gentle",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man.png",
       "text": "'Perso...' Il vecchio annuisce lentamente, come a confermare qualcosa tra sé. 'Questa foresta fa questo effetto. Vieni, lascia che ti spieghi.'",
       "nextEventId": "old_man_4"
     },
 
     "old_man_3": {
       "id": "old_man_3",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man-dark.png",
       "text": "Il vecchio ti sorride in modo inquietante.",
       "nextEventId": "old_man_4"
     },
 
     "old_man_4": {
       "id": "old_man_4",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/river.png",
       "text": "'Questa foresta è circondata da un fiume. Non d'acqua. Ma di pece bollente. E il fumo... può confondere la mente.' Dice il vecchio.",
       "nextEventId": "old_man_5"
     },
 
     "old_man_5": {
       "id": "old_man_5",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man.png",
       "text": "'Oh valoroso cavaliere, la sorgente di questo fiume si trova al centro di questa foresta, custodita da un mostro terribile. Distruggi la sorgente e liberaci da questa prigione!'",
       "nextEventId": "old_man_6"
     },
 
     "old_man_6": {
       "id": "old_man_6",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man.png",
       "text": "'Come raggiungerla? Questa foresta è viva e cambia sempre. Devi seguire la nebbia. Trova la sorgente!'",
       "choices": [
         {
@@ -299,7 +299,7 @@
               "condition": null,
               "consequence": {
                 "text": "Il vecchio indica un sentiero. Lo segui.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The old man"
+                "image": "/images/old-man.png"
               },
               "nextEventId": "path_to_source_1"
             }
@@ -313,7 +313,7 @@
               "condition": null,
               "consequence": {
                 "text": "Punti la spada verso il vecchio e tenti di attaccarlo. 'MA CHE TI PASSA PER LA TESTA?! Ci rivedremo, Wielburg...' Disse il vecchio, sparendo nel bosco. Fai un respiro profondo e continui a camminare.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The old man",
+                "image": "/images/old-man.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "path_to_source_1"
@@ -325,7 +325,7 @@
 
     "path_to_source_1": {
       "id": "path_to_source_1",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Path",
+      "image": "/images/trapper-animal.png",
       "text": "La nebbia si addensa mentre segui il sentiero. Davanti a te, una piccola creatura è intrappolata sotto un ramo caduto, che si dimena in silenzio.",
       "choices": [
         {
@@ -336,7 +336,7 @@
               "condition": null,
               "consequence": {
                 "text": "Ti accovacci e sollevi delicatamente il ramo. La creatura si libera e sparisce nel sottobosco senza voltarsi.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Path"
+                "image": "/images/trapper-animal.png"
               },
               "nextEventId": "path_to_source_2"
             }
@@ -350,7 +350,7 @@
               "condition": null,
               "consequence": {
                 "text": "Tagli il ramo di netto. La creatura scappa via terrorizzata, sparendo nell'oscurità.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Path",
+                "image": "/images/trapper-animal.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "path_to_source_2"
@@ -362,7 +362,7 @@
 
     "path_to_source_2": {
       "id": "path_to_source_2",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Bridge",
+      "image": "/images/river.png",
       "text": "Un ponte stretto attraversa un burrone pieno di fumo nero. A metà, una figura incappucciata blocca il tuo cammino. Non parla.",
       "choices": [
         {
@@ -373,7 +373,7 @@
               "condition": null,
               "consequence": {
                 "text": "'Cerco solo la sorgente. Non verrà alcun male da me.' La figura inclina la testa, poi si fa da parte senza dire una parola.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Bridge"
+                "image": "/images/river.png"
               },
               "nextEventId": "path_to_source_3"
             }
@@ -387,7 +387,7 @@
               "condition": null,
               "consequence": {
                 "text": "Carichi con la spada alzata. La figura si dissolve in fumo prima che tu la raggiunga. Una risata vuota echeggia dal burrone.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Bridge",
+                "image": "/images/river.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "path_to_source_3"
@@ -399,7 +399,7 @@
 
     "path_to_source_3": {
       "id": "path_to_source_3",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Thorns",
+      "image": "/images/hard-path.png",
       "text": "Il sentiero è bloccato da un muro di rovi contorti più alto di te. In fondo all'intrico, due occhi pallidi ti osservano senza battere ciglio.",
       "choices": [
         {
@@ -410,7 +410,7 @@
               "condition": null,
               "consequence": {
                 "text": "Rimani immobile e respiri lentamente. Dopo un lungo momento, i rovi iniziano ad arrotolarsi, aprendo un passaggio stretto.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Thorns"
+                "image": "/images/hard-path.png"
               },
               "nextEventId": "guardian_approach"
             }
@@ -424,7 +424,7 @@
               "condition": null,
               "consequence": {
                 "text": "Fai a pezzi i rovi. Si contorcono e sanguinano linfa scura mentre ti fai strada a forza. Gli occhi pallidi spariscono.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Thorns",
+                "image": "/images/hard-path.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "guardian_approach"
@@ -436,14 +436,14 @@
 
     "guardian_approach": {
       "id": "guardian_approach",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "image": "/images/guardian.png",
       "text": "La nebbia si apre. Entri in una vasta radura dove un unico albero enorme si erge al centro. La sua corteccia è contorta in qualcosa che somiglia a un volto. Le sue radici afferrano la terra come pugni. È vivo, e ti sta guardando.",
       "nextEventId": "guardian_1"
     },
 
     "guardian_1": {
       "id": "guardian_1",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "image": "/images/guardian.png",
       "text": "'NON TI LASCERÒ PASSARE, DEMONIO!' La voce dell'albero fa tremare il suolo sotto i tuoi piedi. I suoi rami si avvolgono come braccia, pronti a colpire.",
       "choices": [
         {
@@ -454,7 +454,7 @@
               "condition": null,
               "consequence": {
                 "text": "Abbassi la spada e alzi una mano aperta. 'Non sono il tuo nemico.'",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian"
+                "image": "/images/guardian.png"
               },
               "nextEventId": "guardian_after_heart"
             }
@@ -468,7 +468,7 @@
               "condition": null,
               "consequence": {
                 "text": "Carichi in avanti con la spada alzata. Un ramo spesso cade e si avvolge attorno al tuo braccio armato, bloccandolo.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+                "image": "/images/guardian.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "guardian_after_sword"
@@ -480,7 +480,7 @@
 
     "guardian_after_heart": {
       "id": "guardian_after_heart",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "image": "/images/guardian.png",
       "text": "L'albero si immobilizza. 'Tu... gli resisti?' Un lungo scricchiolio, come il legno vecchio che si assesta. 'Allora dimostralo.'",
       "choices": [
         {
@@ -491,7 +491,7 @@
               "condition": null,
               "consequence": {
                 "text": "Pianchi la spada nel terreno e avanzi con entrambe le mani aperte. I rami si srotolano lentamente.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian"
+                "image": "/images/guardian.png"
               },
               "nextEventId": "guardian_calmed"
             }
@@ -505,7 +505,7 @@
               "condition": null,
               "consequence": {
                 "text": "Qualcosa scorre attraverso il tuo braccio. La spada si alza da sola e colpisci prima di poter fermarti.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+                "image": "/images/guardian.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "guardian_killed"
@@ -517,7 +517,7 @@
 
     "guardian_after_sword": {
       "id": "guardian_after_sword",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "image": "/images/guardian.png",
       "text": "Il ramo si stringe attorno al tuo braccio armato. Sei bloccato. Il volto dell'albero si abbassa verso il tuo. 'Lasciala andare. O ti stritolo.'",
       "choices": [
         {
@@ -528,7 +528,7 @@
               "condition": null,
               "consequence": {
                 "text": "Apri le dita. La spada cade a terra. Per un momento la pressione si allenta — poi tutto diventa nero.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian"
+                "image": "/images/guardian.png"
               },
               "nextEventId": "guardian_sh_ending"
             }
@@ -542,7 +542,7 @@
               "condition": null,
               "consequence": {
                 "text": "Strappi il braccio libero con forza disumana e conficchi la lama nel profondo del tronco.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+                "image": "/images/guardian.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "guardian_killed"
@@ -554,56 +554,56 @@
 
     "guardian_sh_ending": {
       "id": "guardian_sh_ending",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=Game Over",
+      "image": "/images/guardian.png",
       "text": "Senza la spada, non sei niente in questa foresta. Il ramo si stringe. L'ultima cosa che senti prima che il buio ti inghiotta è una risata — proveniente dalla spada a terra.",
       "endingTitle": "Consumato"
     },
 
     "guardian_calmed": {
       "id": "guardian_calmed",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "image": "/images/guardian.png",
       "text": "Il grande albero esala — un lungo respiro gemente. I suoi rami si abbassano uno per uno. 'Va'. Ma stai attento, cavaliere. Ciò che porti vuole essere nutrito.' Le sue radici si ritirano nella terra, aprendo la via.",
       "nextEventId": "source_approach"
     },
 
     "guardian_killed": {
       "id": "guardian_killed",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Guardian",
+      "image": "/images/guardian.png",
       "text": "L'antico albero emette un lungo gemito vuoto e si immobilizza. La sua corteccia si sfalda. Nel silenzio che segue, noti che la tua mano sulla spada trema — ma non per lo sforzo.",
       "nextEventId": "source_approach"
     },
 
     "source_approach": {
       "id": "source_approach",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+      "image": "/images/source-pool.png",
       "text": "Oltre la radura, la nebbia lascia il posto a un tenue bagliore. Lo segui nel silenzio finché non lo vedi: una pozza di liquido nero, perfettamente immobile, che pulsa di luce fredda dal basso. La sorgente.",
       "nextEventId": "source_deer_1"
     },
 
     "source_deer_1": {
       "id": "source_deer_1",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Creature",
+      "image": "/images/deer-creature.png",
       "text": "Una piccola creatura emerge da dietro la pozza. Somiglia a un cerbiatto, ma i suoi occhi sono troppo grandi e le sue zampe troppo lunghe. Ti fissa con un'espressione quasi umana.",
       "nextEventId": "source_deer_2"
     },
 
     "source_deer_2": {
       "id": "source_deer_2",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Creature",
+      "image": "/images/deer-creature.png",
       "text": "'FERMATI. Ti prego.' La sua voce è dolce e chiara. 'Non devi distruggere la sorgente. La sorgente è un sigillo. Ogni demone in questa foresta vi è legato dentro. Se lo rompi, saranno tutti liberi, incluso quello che vive nella tua...'",
       "nextEventId": "source_interrupted"
     },
 
     "source_interrupted": {
       "id": "source_interrupted",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Old Man",
+      "image": "/images/old-man-dark.png",
       "text": "Un bastone si abbatte. La creatura crolla senza un suono. Il vecchio le sta sopra, il sorriso immutato. 'Non badare ai mostri, Wielburg. Finisci il tuo lavoro.'",
       "nextEventId": "source_choice"
     },
 
     "source_choice": {
       "id": "source_choice",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+      "image": "/images/source-closeup.png",
       "text": "Ti trovi davanti alla sorgente. Il vecchio osserva. Il tuo braccio armato avanza da solo verso la pozza. L'altra mano si stringe al petto.",
       "choices": [
         {
@@ -614,7 +614,7 @@
               "condition": { ">=": ["$swordCount", 5] },
               "consequence": {
                 "text": "Cerchi di afferrare il petto — ma il tuo braccio armato è più veloce. Guardi la tua stessa mano conficcare la lama nella pozza. Non hai scelto questo.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source"
+                "image": "/images/source-closeup.png"
               },
               "nextEventId": "ending_source_destroyed"
             },
@@ -622,7 +622,7 @@
               "condition": null,
               "consequence": {
                 "text": "Lasci cadere la spada e ti getti nella pozza. Il sigillo deve reggere. Sarai tu il lucchetto.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source"
+                "image": "/images/source-pool.png"
               },
               "nextEventId": "ending_sacrifice"
             }
@@ -636,7 +636,7 @@
               "condition": { ">=": ["$swordCount", 5] },
               "consequence": {
                 "text": "Il demone non aveva bisogno di convincerti. Il tuo braccio si stava già muovendo.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+                "image": "/images/source-closeup.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "ending_source_destroyed"
@@ -645,7 +645,7 @@
               "condition": null,
               "consequence": {
                 "text": "Conficchi la spada nella pozza. Il sigillo va in frantumi.",
-                "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The Source",
+                "image": "/images/source-closeup.png",
                 "stateChanges": { "swordCount": 1 }
               },
               "nextEventId": "ending_source_destroyed"
@@ -657,14 +657,14 @@
 
     "ending_source_destroyed": {
       "id": "ending_source_destroyed",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The End",
+      "image": "/images/source-closeup.png",
       "text": "La pozza esplode in una luce nera. La foresta urla. Il vecchio ride — un suono ormai non più umano. Dalla nebbia, sagome iniziano a emergere. I demoni sono liberi. Li hai liberati tu.",
       "endingTitle": "Il Sigillo è Spezzato"
     },
 
     "ending_sacrifice": {
       "id": "ending_sacrifice",
-      "image": "https://placehold.co/800x500/1a1714/e8e0d0?text=The End",
+      "image": "/images/source-pool.png",
       "text": "Il liquido nero si alza intorno a te, freddo e assoluto. La foresta ammutolisce. Il vecchio urla — una volta — poi silenzio. Da qualche parte lontana, un uccello canta. Il bosco è immobile. Sei tu il sigillo ora.",
       "endingTitle": "L'Ultimo Cavaliere"
     }
