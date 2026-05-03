@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 interface ImageWithShimmerProps {
   src: string;
@@ -19,12 +19,17 @@ export function ImageWithShimmer({
 }: ImageWithShimmerProps) {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
+  const imgRef = useRef<HTMLImageElement>(null);
 
-  // Reset load state when the image URL changes so stale 'loaded' never leaks
-  // to a new image (e.g. card advances reuse the same component instance).
+  // Reset load state when the image URL changes. For images already in the
+  // browser's memory cache, onLoad may never re-fire (Safari/iOS), so check
+  // img.complete immediately after React updates the DOM.
   useEffect(() => {
     setLoaded(false);
     setError(false);
+    const img = imgRef.current;
+    if (img?.complete && img.naturalWidth > 0) setLoaded(true);
+    else if (img?.complete && img.naturalWidth === 0 && img.src) setError(true);
   }, [src]);
 
   const missing = !src;
@@ -41,6 +46,7 @@ export function ImageWithShimmer({
       {/* Image */}
       {!error && !missing && (
         <img
+          ref={imgRef}
           src={src.startsWith('/') && !src.startsWith('//') ? import.meta.env.BASE_URL.replace(/\/$/, '') + src : src}
           alt={alt}
           onLoad={() => setLoaded(true)}

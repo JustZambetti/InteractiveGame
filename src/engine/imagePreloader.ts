@@ -3,11 +3,19 @@ import { replayPath } from './pathReplayer';
 
 const preloadedUrls = new Set<string>();
 
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+function resolveUrl(url: string): string {
+  return url.startsWith('/') && !url.startsWith('//') ? base + url : url;
+}
+
 export function preloadImage(url: string): void {
-  if (!url || preloadedUrls.has(url)) return;
-  preloadedUrls.add(url);
+  if (!url) return;
+  const resolved = resolveUrl(url);
+  if (preloadedUrls.has(resolved)) return;
+  preloadedUrls.add(resolved);
   const img = new Image();
-  img.src = url;
+  img.src = resolved;
 }
 
 export function preloadImages(urls: string[]): void {
